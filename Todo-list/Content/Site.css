@@ -19,8 +19,44 @@
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
-textarea.notes {
-    resize: none;
+label,
+.form-group div {
+    padding: 15px 15px;
+    margin: 0;
 }
 
+td, th {
+    text-align: center;
+}
+
+.form-buttons{
+    text-align: center;
+}
+
+textarea.notes {
+    resize: none;
+    border: none;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.Done {
+    background-color: lightgreen;
+}
+
+.Doing {
+    background-color: yellow;
+}
+
+.Todo {
+    background-color: orange;
+}
 

@@ -7,7 +7,7 @@
 <h2>Your notes</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add note", "Create")
 </p>
 <table class="table">
     <tr>
@@ -29,10 +29,10 @@
             @Html.DisplayFor(modelItem => item.CreatedAt)
         </td>
         <td>
-            @Html.TextAreaFor(modelItem => item.Message, 5, 120, new { @class = "notes", disabled = "disabled" })
+            @Html.TextAreaFor(modelItem => item.Message, 5, 50, new { @class = "notes", disabled = "disabled" })
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Status)
+            <span class="status @item.Status">@Html.DisplayFor(modelItem => item.Status)</span>
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { createdAt = item.CreatedAt }) |

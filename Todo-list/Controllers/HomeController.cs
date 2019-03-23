@@ -11,7 +11,7 @@ namespace Todo_list.Controllers
     {
         public ActionResult Index()
         {
-            return View(Database.Notes);
+            return View(Database.Notes.OrderByDescending(x=>x.CreatedAt).ToList());
         }
 
         [HttpGet]
@@ -28,7 +28,6 @@ namespace Todo_list.Controllers
                 Database.Notes.Add(note);
                 return RedirectToAction("Index");
             }
-            ViewBag.Message = "Not valid";
             return View();
         }
 
@@ -49,11 +48,13 @@ namespace Todo_list.Controllers
                 Note updatedNote = Database.Notes.Where(x =>
                     x.CreatedAt.ToString("MM/dd/yyyy HH:mm:ss") == note.CreatedAt.ToString("MM/dd/yyyy HH:mm:ss"))
                     .FirstOrDefault();
-                updatedNote.Message = note.Message;
-                updatedNote.Status = note.Status;
+                if(updatedNote!=null)
+                {
+                    updatedNote.Message = note.Message;
+                    updatedNote.Status = note.Status;
+                }
                 return RedirectToAction("Index");
             }
-            ViewBag.Message = "Not valid";
             return View(note.CreatedAt);
         }
 

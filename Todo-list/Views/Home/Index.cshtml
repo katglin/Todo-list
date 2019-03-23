@@ -9,35 +9,63 @@
 <p>
     @Html.ActionLink("Add note", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Message)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedAt)
-        </td>
-        <td>
-            @Html.TextAreaFor(modelItem => item.Message, 5, 50, new { @class = "notes", disabled = "disabled" })
-        </td>
-        <td>
-            <span class="status @item.Status">@Html.DisplayFor(modelItem => item.Status)</span>
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { createdAt = item.CreatedAt }) |
-            @Html.ActionLink("Delete", "Delete", new { createdAt = item.CreatedAt })
-        </td>
-    </tr>
+<table class="table" id="notes">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Message)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.TextAreaFor(modelItem => item.Message, 5, 50, new { @class = "notes", disabled = "disabled" })
+            </td>
+            <td>
+                <span class="status @item.Status">@Html.DisplayFor(modelItem => item.Status)</span>
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { createdAt = item.CreatedAt }) |
+                @Html.ActionLink("Delete", "Delete", new { createdAt = item.CreatedAt })
+            </td>
+        </tr>
 }
+    </tbody>
 </table>
+
+@section Scripts {
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#notes').DataTable({
+                "language": {
+                    "lengthMenu": "Display _MENU_ items on the page",
+                    "zeroRecords": "You have no notes yet",
+                    "info": "Page _PAGE_ of _PAGES_",
+                    "infoEmpty": "No available data",
+                    "infoFiltered": "(_MAX_ items checked)",
+                    "search": "Search:",
+                    "paginate": {
+                        "first": "First",
+                        "last": "Last",
+                        "next": "Next",
+                        "previous": "Previous"
+                    }
+                }
+            });
+        });
+     </script>
+}
